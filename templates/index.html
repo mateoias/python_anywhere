@@ -1,0 +1,38 @@
+{% extends "base.html"%}
+{% block content%}
+
+
+<div class="jumbotron">
+        <h1 class="display-4">GPT-3 Can Help with All your Needs</h1>
+</div>
+
+        <script>
+          function waiting_message() {
+            var x = document.getElementById("myDIV")
+              x.style.display = "block"
+            };
+          </script>
+
+<div class = "article-title">
+      <p>
+        <h4>Hello human, are you tired of writing mind numbingly dull articles for disinterested students? <br>
+        Well, why not give your automated pal GPT-3 a chance to lighten your load?<br>
+        Just choose a genre and type in your topic of choice and I will write for you!<br>
+        Here are some sample prompts: "Pizza", "Making pizza", "The history of pizza" <br>
+        See the About page for further information.
+          <div id="myDIV">
+            <p class = myDIV>
+          Please wait for about 20 seconds, longer if you requested questions</p>
+          </div>
+
+                <form  onsubmit="waiting_message()" action="/articles" method = "POST" >
+                    <p>Article <input type = "text" name = "Article" placeholder = "Enter your topic" /></p>
+                    <p>Dialog <input type = "text" name = "Dialog" placeholder = "Enter your topic" /></p>
+                    <p>Add Questions? <input type = "checkbox" name = "questions" placeholder = "Enter your topic" /></p>
+
+                    <p><input id = "flash" type = "submit" value = "submit"  /></p>
+                </form>
+
+</div>
+
+{%endblock%}

@@ -1,0 +1,25 @@
+{% extends "base.html"%}
+{% block content%}
+
+
+<div class="jumbotron">
+        <h1 class="display-4">Here's your Article</h1>
+</div>
+<div class = "article-title">
+
+     
+        <h4> {{ genre}} about {{ topic }} </h4>
+        {% if genre == "Article" %}
+        <div class="article">
+         {{ main_text }}
+        </div>
+                <pre> {{ question_text }} </pre> 
+        {% else %}
+                <pre> {{ main_text }} </pre>
+                <pre>  {{ question_text}} </pre>   
+       {% endif %}   
+       
+</div>
+
+
+{%endblock%}
