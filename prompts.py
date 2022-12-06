@@ -3,7 +3,6 @@ import os
 openai.api_key = os.environ.get("OPENAI_API_KEY")
 
 def prompt_maker(genre, topic):
-    print('prompt_maker', genre, topic)
     if topic != "":
         if genre == "Article":
             prompt = f"prompt: write a long, simple article about the electronic transportation revolution for a second grader--> completion: It seems like the current trend in transportation is away from engines that burn fuel and instead are powered by electric motors. This method of getting about has all sorts of benefits. The one that is most pronounced is that these electric vehicles (EVs) do not pollute the air with waste gases from burning fuels like gasoline or diesel. In addition, electric motors are much quieter, so the switch to electric vehicles is helping to eliminate both air pollution and noise pollution. Electric transportation has another major benefit in that the electricity can come from green sources. Solar or wind power can be used to charge an electric vehicle, and it does not cost anything. Instead of buying gasoline or relying on other energy sources, people can simply use these much cheaper forms of energy to power EVs. It is for this reason that making the transition to EVs is considered one of the best things that can be done to achieve energy independence. Electric vehicles have a much longer history than most people recall. Most subways, trams, and trolleys in cities throughout the world use electricity as their power source. The first electric streetcar was introduced in Berlin, Germany, in 1881. These types of transportation use collector systems to power them. The latest electric scooters, cars, and trucks use batteries, though. With batteries comes much greater freedom to move about. Vehicles relying on collector systems need to stay on a particular rail or track, as that is where their power is coming from. Electric vehicles are not confined to land, though. Today, there are companies that manufacture electric boats that are equipped with solar panels. As the boats are moored in the sun, their batteries get charged. The boats come in different sizes, from small pleasure boats to larger ferries. The best part about them is they never need to be filled with fuel! The air above us is also a place where electric vehicles move about. Electric drones are very popular today, and they are used for all sorts of tasks. Farmers use them to survey their fields, and film companies use them for aerial shots. Compared to hiring a helicopter or airplane, these drones are considerably more cost-effective. As for taking passengers in flight, electric airplane technology is advancing, although not nearly as quickly as land or water-based vehicles. In the past decade, the airplanes Solar Impulse 1 and Solar Impulse 2 have proven that round-the-world flight using only solar power is possible. While it may take a long time before such electric airplanes find a commercial use, these airplanes gave proof of concept. Due to greater awareness of environmental issues such as climate change, the demand for all kinds of electric transportation is likely to grow to the point where these vehicles become the norm. The internal combustion engine, which helped transform the world by making long-distance transportation easy and inexpensive, is on its way out. In its place will be cleaner, quieter electric vehicles. They will help us not only breathe better, but sleep better as well.--> prompt: Write a long, easy article about {topic}--> completion:"
@@ -25,6 +24,9 @@ def prompt_maker(genre, topic):
     Adan: Well, congratulations for getting it. It’s another small step towards helping to save our planet!
     Write a very, very, very, very long dialog about {topic}-->Dialog:"""
             return prompt
+        else:
+            prompt = f"""write a {genre} about {topic}"""
+            return prompt
 # add "simple" to the prompt get that Taiwan style writing
 # adding easy makes it easy, but always short
 
@@ -39,11 +41,14 @@ def model_builder(genre, prompt):
     if genre=="Article":
         temperature = 0.95
         frequency_penalty = 0
-    if genre=="Dialog":
+    elif genre=="Dialog":
         temperature = 0.95
         frequency_penalty = 0.25
-    if genre == "write_questions":
+    elif genre == "write_questions":
         temperature = 0.70
+        frequency_penalty = 0
+    else:
+        temperature = 0.8
         frequency_penalty = 0
     response = openai.Completion.create(
         model="text-davinci-003",

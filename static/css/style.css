@@ -13,7 +13,7 @@ body {
 
   .article-title {
     padding: 20px;
-    text-align: left
+    text-align: left;
   }
 
   .article{
@@ -33,3 +33,10 @@ body {
     display: none;
     color: red
   }
+
+  ul {
+  list-style-type: circle;
+}
+ .list-red {
+     color: red;
+ }

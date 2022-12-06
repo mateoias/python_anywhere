@@ -1,11 +1,11 @@
 from config import app, login
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, send_file
 # from flask_migrate import Migrate
 from forms import LoginForm,  RegistrationForm
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from models import User, db
-from prompts import prompt_maker, model_builder, question_writer
+from prompts_v2 import prompt_maker, model_builder, question_writer
 # migrate = Migrate(app,db)
 login.login_view = 'login'
 
@@ -57,21 +57,26 @@ def about():
 
 @app.route('/articles', methods = ['POST', 'GET'])
 def articles():
-
     if request.method == 'POST':
         questions = False
+        user_input = []
+        words = ""
         form_data = request.form
-        print(form_data)
+        print("form data" , form_data)
         for item in form_data.items():
-            if item[1] != "" and item[0] !="questions":
-                genre = item[0]
-                topic = item[1]
-            if item[1] == "on":
-                questions = True
-        prompt = prompt_maker(genre, topic)
-        print("article prompt" , prompt)
+            user_input.append(item)
+        genre = user_input[0][1]
+        topic = user_input[1][1]
+        # words = user_input[2][1]
+        # questions = user_input[3][1]
+        topic.strip()
+        if user_input[2][1] =="on":
+            questions = True
+        if len(user_input)>3:
+            words = user_input[3][1]
+            words.strip()
+        prompt = prompt_maker(genre, topic, words)
         text= model_builder(genre, prompt)
-        print("application file", text)
         if questions ==True:
             questions_prompt = question_writer(genre, text)
             print("question prompt" , questions_prompt)
@@ -80,6 +85,18 @@ def articles():
         else:
             return render_template('articles.html', genre = genre, topic = topic, main_text = text, question_text = "")
 
+# @app.route('/download')
+# def download_file():
+#     return render_template('index.html', title='Home Page')
+	#path = "html2pdf.pdf"
+	#path = "info.xlsx"
+	#path = "simple.docx"
+# 	path = "sample.txt"
+# 	return send_file(path, as_attachment=True)
+# <!--        To download the text click here-->
+# <!--        <p>-->
+# <!--	<a href="{{ url_for('download_file') }}">Download</a>-->
+# <!--</p>-->
 
 # for dialog, temperature high (0.95) frequence penalty high (0.75)
 # for article temperature(0.7), frequency penalty 0

@@ -3,7 +3,7 @@
 
 
 <div class="jumbotron">
-        <h1 class="display-4">Computer assisted Language Learning</h1>
+        <h1 class="display-4">Content Writing Tool</h1>
 </div>
 
         <script>
@@ -15,37 +15,46 @@
 
 <div class = "article-title">
       <p h4 class = text-primary>
-      Welcome to the computer assisted language learning website. I am providing
-      a number of automated tools to make life easier for language teachers and language learners.
-      The current featured content is an automated article writer for teachers who want to reinforce topics
-      or for students wo want to practice their language skils by reading about topic that interest them
-      Just choose a genre from the drop down menu and type in your topic of choice.
-      The system works best with simple noun/gerund topics such as
-      "Pizza", "Making pizza", "The history of pizza".
-       See the <a href="{{ url_for('about') }}">About</a> page for further information.
+      Welcome to the computer assisted article writing tool. This is an automated article writer for teachers
+      who want to create texts to reinforce topics/vocabulary,
+      and for students who want to practice their language skils by reading about topics that interest them.<br>
+      Just choose a genre from the list below, enter your topic of choice and hit submit.<br>
+      <!--If you wish to focus on certain vocabulary you can put in a list of words that must be in the text-->
+      You can also optionally add TOEFL style comprehension questions by checking the box below<br>
+      See the <a href="{{ url_for('about') }}">About</a> page for further information.
           <div id="myDIV">
             <p class = myDIV>
           Please wait for about 20 seconds, longer if you requested questions</p>
           </div>
 
-                <form  onsubmit="waiting_message()" action="/articles" method = "POST" >
-                    <p>Article <input type = "text" name = "Article" placeholder = "Enter your topic" /></p>
-                    <p>Dialog <input type = "text" name = "Dialog" placeholder = "Enter your topic" /></p>
-                    <p>Add Questions? <input type = "checkbox" name = "questions" placeholder = "Enter your topic" /></p>
+                <!--<form  onsubmit="waiting_message()" action="/articles" method = "POST" >-->
+                <!--    <p>Article <input type = "text" name = "Article" placeholder = "Enter your topic" /></p>-->
+                <!--    <p>Dialog <input type = "text" name = "Dialog" placeholder = "Enter your topic" /></p>-->
+                <!--    <p>Add Questions? <input type = "checkbox" name = "questions" placeholder = "Enter your topic" /></p>-->
 
-                    <p><input id = "flash" type = "submit" value = "submit"  /></p>
-                </form>
-            <!--<form onsubmit="waiting_message()" action="/articles" method = "POST">-->
-            <!--  <input type="radio" id="Article" name="genre" >-->
-            <!--  <label for="Article">Article</label><br>-->
-            <!--  <input type="radio" id="Dialog" name="genre">-->
-            <!--  <label for="Dialog">Dialog</label><br>-->
-            <!--  <input type="radio" id="Poem" name="genre">-->
-            <!--  <label for="Poem">Poem</label>-->
-            <!--  <input type = "text" name = "topic" placeholder = "Enter your topic" />-->
-            <!--Add Questions? <input type = "checkbox" name = "questions" placeholder = "Enter your topic" />-->
-            <!--<p><input id = "flash" type = "submit" value = "Submit"  /></p>-->
-            <!--</form>-->
+                <!--    <p><input id = "flash" type = "submit" value = "submit"  /></p>-->
+                <!--</form>-->
+      Choose a genre:
+      <form onsubmit="waiting_message()" action="/articles" method = "POST">
+           <input type="radio" value="Article" name="genre">
+           <label for="Article">Article</label><br>
+           <input type="radio" value="Dialog" name="genre">
+          <label for="Dialog">Dialog</label><br>
+           <input type="radio" value="Poem" name="genre">
+           <label for="Poem">Poem</label><br>
+           <hr>
+            The system works best with simple nouns/noun phrases such as:<br>
+            "Pizza", "Making pizza", "The history of pizza", etc.<br>
+            Enter topic here:&emsp;
+           <input type = "text" name = "topic" placeholder = "Enter your topic"><br>
+           <hr>
+          Further Options: <br>
+          To add comprehension questions about the text, check here
+          <input type = "checkbox" name = "questions" placeholder = "Enter your topic"><br>
+          If you want specific vocabulary words in the text, enter them below, separated by commas.<br>
+          <input type = "text" name = "vocab" placeholder = "Enter words, separated by commas"><br><br>
+          <p><input id = "flash" type = "submit" value = "Submit" ></p>
+          </form>
 
 </div>
 
