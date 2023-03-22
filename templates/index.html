@@ -34,25 +34,47 @@
 
                 <!--    <p><input id = "flash" type = "submit" value = "submit"  /></p>-->
                 <!--</form>-->
-      Choose a genre:
+      <p h3> Choose a genre:</p>
       <form onsubmit="waiting_message()" action="/articles" method = "POST">
-           <input type="radio" value="Article" name="genre">
+           <input type="radio" value="Article" name="genre" required>
            <label for="Article">Article</label><br>
            <input type="radio" value="Dialog" name="genre">
           <label for="Dialog">Dialog</label><br>
            <input type="radio" value="Poem" name="genre">
            <label for="Poem">Poem</label><br>
+
+            <input type="radio" name="genre" value="Genre">
+            <label for = Genre>Choose your own genre! (beta)</label><br>
+                <div id="input-text" style="display: none;">
+            <label for="input-field">Enter Genre here:</label>
+            <input type="text" id="input-field" name="input-text">
+                </div>
+
+<script>
+  document.querySelectorAll('input[type="radio"]').forEach(function (radio) {
+    radio.addEventListener('change', function (event) {
+      if (event.target.value === 'Genre') {
+        document.getElementById('input-text').style.display = 'block';
+      } else {
+        document.getElementById('input-text').style.display = 'none';
+      }
+    });
+  });
+</script>
+
+
+
            <hr>
+          <p h3> Enter Your Topic:  </p>
             The system works best with simple nouns/noun phrases such as:<br>
             "Pizza", "Making pizza", "The history of pizza", etc.<br>
-            Enter topic here:&emsp;
-           <input type = "text" name = "topic" placeholder = "Enter your topic"><br>
+           <input type = "text" name = "topic" placeholder = "Enter topic" required><br>
            <hr>
-          Further Options: <br>
-          To add comprehension questions about the text, check here
-          <input type = "checkbox" name = "questions" placeholder = "Enter your topic"><br>
+          <p h3> Further Options: </p>
           If you want specific vocabulary words in the text, enter them below, separated by commas.<br>
-          <input type = "text" name = "vocab" placeholder = "Enter words, separated by commas"><br><br>
+          <input type = "text" name = "vocab" placeholder = "Enter vocabulary"><br>
+            To add comprehension questions about the text, check here
+          <input type = "checkbox" name = "questions"> <br><br>
           <p><input id = "flash" type = "submit" value = "Submit" ></p>
           </form>
 

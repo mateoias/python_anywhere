@@ -13,6 +13,20 @@
     use them for experimentation and not on an industrial scale. I will not, of course, misuse your email address.<br>
        See the <a href="{{ url_for('about') }}">About</a> page for further information.<br>
        </p>
+             <p h4 class = text-primary>
+            {% with messages = get_flashed_messages(with_categories=true) %}
+               {% if messages %}
+                  {% for message in messages %}
+                  {% if message[0]=="error"%}
+                  <div class = "alert"> {{ message[1] }}</div>
+                  {% elif message[0] == 'success'%}
+                <div class = "alert"> {{ message[1] }}</div>
+
+                    {% endif %}
+                  {% endfor %}
+               {% endif %}
+            {% endwith %}
+            </p>
 
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}

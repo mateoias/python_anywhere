@@ -8,7 +8,7 @@
 <div class = "article-title">
 
 
-        <h4> {{ genre}} about {{ topic }} </h4>
+        <!--<h4> {{ genre}} about {{ topic }} </h4>-->
 
 
         {% if genre == "Article" %}
@@ -21,8 +21,13 @@
                 <pre>  {{ question_text}} </pre>
        {% endif %}
 
+</div
+<div>
+<form method="POST" action="{{ url_for('download_text') }}">
+  <input type="hidden" name="text" value="{{ genre}} about {{ topic }} {{ main_text }} {{question_text}}">
+  <button type="submit">Download Text</button>
+</form>
 </div>
-
 
 {%endblock%}
 

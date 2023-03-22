@@ -40,3 +40,14 @@ body {
  .list-red {
      color: red;
  }
+ .alert {
+        padding: 20px;
+    text-align: left;
+    color: red;
+    font-size: 30px;
+}
+input[type=checkbox] {
+  width: 50px;
+}
+
+
